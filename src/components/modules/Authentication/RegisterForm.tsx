@@ -22,6 +22,8 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 import Password from "@/components/ui/Password";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
 const formSchema = z
   .object({
@@ -45,6 +47,7 @@ export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [register] = useRegisterMutation();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -60,8 +63,26 @@ export function RegisterForm({
 
   const role = useWatch({ control: form.control, name: "role" });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      role: data.role,
+      vehicleInfo: {
+        model: data.vehicleModel,
+        licensePlate: data.licensePlate,
+      },
+    };
+
+    try {
+      const result = await register(userInfo).unwrap();
+      console.log(result);
+      toast.success("User created successfully");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error.data.message);
+    }
   };
 
   return (
