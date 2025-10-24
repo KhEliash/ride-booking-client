@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import {
   Form,
   FormControl,
@@ -34,6 +34,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const [login] = useLoginMutation();
+  const navigate = useNavigate();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,6 +48,7 @@ export function LoginForm({
       const result = await login(data).unwrap();
       console.log(result);
       toast.success("User logged in successfully");
+      navigate("/");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error.data.message);

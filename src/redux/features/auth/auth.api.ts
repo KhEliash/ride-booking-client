@@ -14,6 +14,7 @@ export const authApi = baseApi.injectEndpoints({
         url: "/auth/logout",
         method: "POST",
       }),
+      invalidatesTags: ["USER"]
     }),
 
     register: builder.mutation({
@@ -29,6 +30,7 @@ export const authApi = baseApi.injectEndpoints({
         url: "/user/me",
         method: "GET",
       }),
+      providesTags: ["USER"]
     }),
   }),
 });
