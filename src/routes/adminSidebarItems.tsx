@@ -1,5 +1,8 @@
-import Analytics from "@/pages/admin/Analytics";
+// import Analytics from "@/pages/admin/Analytics";
  import type { ISidebarItems } from "@/types";
+import { lazy } from "react";
+
+ const Analytics = lazy(()=>import ("@/pages/admin/Analytics"))
 
 export const adminSidebarItems: ISidebarItems[] = [
   {

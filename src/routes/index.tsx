@@ -5,7 +5,7 @@ import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import { generateRoutes } from "@/utils/generateRoutes";
 
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { riderSidebarItems } from "./riderSidebarItems";
 import { driverSidebarItems } from "./driverSidebarItems";
@@ -24,17 +24,26 @@ export const router = createBrowserRouter([
   {
     Component: DashboardLayout,
     path: "/admin",
-    children: [...generateRoutes(adminSidebarItems)],
+    children: [
+      { index: true, element: <Navigate to={"/admin/analytics"} /> },
+      ...generateRoutes(adminSidebarItems),
+    ],
   },
   {
     Component: DashboardLayout,
     path: "/rider",
-    children: [...generateRoutes(riderSidebarItems)],
+    children: [
+      { index: true, element: <Navigate to={"/rider/add-ride"} /> },
+      ...generateRoutes(riderSidebarItems),
+    ],
   },
   {
     Component: DashboardLayout,
     path: "/driver",
-    children: [...generateRoutes(driverSidebarItems)],
+    children: [
+      { index: true, element: <Navigate to={"/driver/accept-ride"} /> },
+      ...generateRoutes(driverSidebarItems),
+    ],
   },
   {
     Component: Login,

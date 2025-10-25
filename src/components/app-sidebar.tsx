@@ -26,7 +26,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
   return (
     <Sidebar {...props}>
-      <SidebarHeader>logo</SidebarHeader>
+      <SidebarHeader>
+        <Link to={"/"}>Home</Link>
+      </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
