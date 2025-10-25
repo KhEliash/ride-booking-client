@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
     path: "/",
     children: [
       {
-        Component: withAuth(About),
+        Component: About,
         path: "about",
       },
     ],
