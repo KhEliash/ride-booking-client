@@ -1,4 +1,3 @@
-// import Analytics from "@/pages/admin/Analytics";
  import type { ISidebarItems } from "@/types";
 import { lazy } from "react";
 

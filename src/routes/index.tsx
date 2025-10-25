@@ -9,6 +9,10 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { riderSidebarItems } from "./riderSidebarItems";
 import { driverSidebarItems } from "./driverSidebarItems";
+import { withAuth } from "@/utils/withAuth";
+import Unauthorized from "@/pages/Unauthorized";
+import { role } from "@/constants/role";
+import type { TRole } from "@/types";
 
 export const router = createBrowserRouter([
   {
@@ -16,13 +20,13 @@ export const router = createBrowserRouter([
     path: "/",
     children: [
       {
-        Component: About,
+        Component: withAuth(About),
         path: "about",
       },
     ],
   },
   {
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.admin as TRole),
     path: "/admin",
     children: [
       { index: true, element: <Navigate to={"/admin/analytics"} /> },
@@ -30,7 +34,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.rider as TRole),
     path: "/rider",
     children: [
       { index: true, element: <Navigate to={"/rider/add-ride"} /> },
@@ -38,7 +42,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.driver as TRole),
     path: "/driver",
     children: [
       { index: true, element: <Navigate to={"/driver/accept-ride"} /> },
@@ -52,5 +56,9 @@ export const router = createBrowserRouter([
   {
     Component: Register,
     path: "/register",
+  },
+  {
+    Component: Unauthorized,
+    path: "/unauthorized",
   },
 ]);
