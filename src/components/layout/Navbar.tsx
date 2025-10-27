@@ -27,6 +27,7 @@ const navigationLinks = [
   { href: "/about", label: "About", role: "public" },
   { href: "/features", label: "Features", role: "public" },
   { href: "/faq", label: "Faq", role: "public" },
+  { href: "/contact", label: "Contact", role: "public" },
   { href: "/admin", label: "Dashboard", role: role.admin },
   { href: "/rider", label: "Dashboard", role: role.rider },
   { href: "/driver", label: "Dashboard", role: role.driver },

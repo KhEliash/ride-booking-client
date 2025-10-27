@@ -16,6 +16,7 @@ import type { TRole } from "@/types";
 import Home from "@/pages/Home";
 import Features from "@/pages/Features";
 import Faq from "@/pages/Faq";
+import Contact from "@/pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         Component: Faq,
         path: "faq",
+      },
+      {
+        Component: Contact,
+        path: "contact",
       },
     ],
   },
