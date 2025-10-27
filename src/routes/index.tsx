@@ -15,6 +15,7 @@ import { role } from "@/constants/role";
 import type { TRole } from "@/types";
 import Home from "@/pages/Home";
 import Features from "@/pages/Features";
+import Faq from "@/pages/Faq";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         Component: Features,
         path: "features",
+      },
+      {
+        Component: Faq,
+        path: "faq",
       },
     ],
   },
