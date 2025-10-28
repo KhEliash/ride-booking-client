@@ -262,7 +262,7 @@ const RideDetails = () => {
 
           {/* Driver Details */}
           {isDriverInfoAvailable && (
-            <Card className="shadow-lg border-l-4 border-blue-500 dark:border-l-4 dark:border-blue-700 dark:bg-gray-800 dark:border-gray-700">
+            <Card className="shadow-lg border-l-4 border-blue-500 dark:border-l-4 dark:border-blue-700 dark:bg-gray-800  ">
               <CardHeader>
                 <CardTitle className="flex items-center text-xl dark:text-white">
                   <User className="w-5 h-5 mr-2 text-blue-500" /> Driver
