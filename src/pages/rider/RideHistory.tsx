@@ -44,6 +44,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 type Ride = {
   _id: string;
@@ -95,6 +96,7 @@ const RideHistory = () => {
   const totalPages = Math.ceil(filteredRides.length / limit);
 
   const [cancelRide] = useCancelRideMutation();
+  const navigate =useNavigate()
 
   const handleCancelRide = async (id: string) => {
     try {
@@ -104,6 +106,10 @@ const RideHistory = () => {
     } catch (err: any) {
       toast.error(err?.data?.message || "Failed to cancel ride");
     }
+  };
+
+  const handleViewDetails = (rideId: string) => {
+    navigate(`/ride-details/${rideId}`);
   };
 
   if (isLoading) {
@@ -242,7 +248,13 @@ const RideHistory = () => {
                     {new Date(ride.requestedAt).toLocaleString()}
                   </TableCell>
                   <TableCell className="flex justify-center cursor-pointer text-blue-500">
-                    <Eye />
+                     <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleViewDetails(ride._id)}
+                      >
+                        <Eye className="text-blue-500 " />
+                      </Button>
                   </TableCell>
                   <TableCell>
                     {ride.status === "requested" ? (

@@ -25,6 +25,13 @@ export const riderApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["RIDER"],
     }),
+    getRideById: builder.query({
+      query: (id) => ({
+        url: `/ride/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["RIDER"],
+    }),
   }),
 });
 
@@ -32,4 +39,5 @@ export const {
   useAddRideMutation,
   useRideHistoryQuery,
   useCancelRideMutation,
+  useGetRideByIdQuery,
 } = riderApi;

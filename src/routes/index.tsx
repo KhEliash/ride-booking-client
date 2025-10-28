@@ -17,6 +17,7 @@ import Home from "@/pages/Home";
 import Features from "@/pages/Features";
 import Faq from "@/pages/Faq";
 import Contact from "@/pages/Contact";
+import RideDetails from "@/pages/rider/RideDetails";
 
 export const router = createBrowserRouter([
   {
@@ -80,5 +81,9 @@ export const router = createBrowserRouter([
   {
     Component: Unauthorized,
     path: "/unauthorized",
+  },
+  {
+    Component: RideDetails,
+    path: "/ride-details/:id",
   },
 ]);
