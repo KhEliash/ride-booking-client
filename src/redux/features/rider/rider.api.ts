@@ -2,29 +2,34 @@ import { baseApi } from "@/redux/baseApi";
 
 export const riderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    
-
     addRide: builder.mutation({
       query: (rideInfo) => ({
         url: "/ride/ride-request",
         method: "POST",
         data: rideInfo,
       }),
+      invalidatesTags: ["RIDER"],
     }),
     rideHistory: builder.query({
-      query: (params ) => ({
+      query: (params) => ({
         url: "/ride/rider-history",
         method: "GET",
-        params
-        // data: rideInfo,
+        params,
       }),
+      providesTags: ["RIDER"],
     }),
-
-    
+    cancelRide: builder.mutation({
+      query: (id: string) => ({
+        url: `ride/cancel/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["RIDER"],
+    }),
   }),
 });
 
 export const {
   useAddRideMutation,
-  useRideHistoryQuery
+  useRideHistoryQuery,
+  useCancelRideMutation,
 } = riderApi;

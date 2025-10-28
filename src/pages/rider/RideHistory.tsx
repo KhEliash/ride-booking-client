@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useMemo } from "react";
-import { useRideHistoryQuery } from "@/redux/features/rider/rider.api";
+import {
+  useCancelRideMutation,
+  useRideHistoryQuery,
+} from "@/redux/features/rider/rider.api";
 import {
   Table,
   TableHeader,
@@ -27,6 +31,19 @@ import {
   PaginationNext,
 } from "@/components/ui/pagination";
 import { Separator } from "@/components/ui/separator";
+import { Eye } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 type Ride = {
   _id: string;
@@ -39,7 +56,7 @@ type Ride = {
 };
 
 const RideHistory = () => {
-  const { data, error, isLoading } = useRideHistoryQuery(undefined);
+  const { data, error, isLoading,refetch } = useRideHistoryQuery(undefined);
   const allRides: Ride[] = data?.data || [];
 
   // Filters and pagination state
@@ -76,6 +93,18 @@ const RideHistory = () => {
   const start = (page - 1) * limit;
   const paginatedRides = filteredRides.slice(start, start + limit);
   const totalPages = Math.ceil(filteredRides.length / limit);
+
+  const [cancelRide] = useCancelRideMutation();
+
+  const handleCancelRide = async (id: string) => {
+    try {
+      const res = await cancelRide(id).unwrap();
+      toast.success(res.message || "Ride cancelled successfully!");
+      refetch()
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed to cancel ride");
+    }
+  };
 
   if (isLoading) {
     return (
@@ -190,6 +219,8 @@ const RideHistory = () => {
               <TableHead>Fare</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Requested At</TableHead>
+              <TableHead>Details</TableHead>
+              <TableHead>Cancel</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -209,6 +240,41 @@ const RideHistory = () => {
                   <TableCell className="capitalize">{ride.status}</TableCell>
                   <TableCell>
                     {new Date(ride.requestedAt).toLocaleString()}
+                  </TableCell>
+                  <TableCell className="flex justify-center cursor-pointer text-blue-500">
+                    <Eye />
+                  </TableCell>
+                  <TableCell>
+                    {ride.status === "requested" ? (
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="destructive" size="sm">
+                            Cancel
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you sure you want to cancel this ride?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Close</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => handleCancelRide(ride._id)}
+                              className="bg-red-600 text-white hover:bg-red-700"
+                            >
+                              Confirm Cancel
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    ) : (
+                      <span className="text-gray-400 text-sm">—</span>
+                    )}
                   </TableCell>
                 </TableRow>
               ))
