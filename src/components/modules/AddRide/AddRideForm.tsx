@@ -70,7 +70,6 @@ export function RideBookingForm({
       destinationLng: undefined,
     } as Partial<RideFormValues>,
   });
-  const { reset } = form;
 
   const onSubmit = async (data: RideFormValues) => {
     const rideInfo = {
@@ -87,7 +86,7 @@ export function RideBookingForm({
     try {
       await addRide(rideInfo).unwrap();
       toast.success("Ride created successfully");
-      reset();
+      form.reset();
     } catch (error: any) {
       toast.error(error.data.message);
     }
