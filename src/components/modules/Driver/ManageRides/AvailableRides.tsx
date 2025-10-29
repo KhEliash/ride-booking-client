@@ -27,11 +27,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
-const AcceptRide = () => {
+const AvailableRides = () => {
   const { data: availableRides, isLoading } = useAvailableRidesQuery(undefined);
   const [acceptRide] = useAcceptRideMutation();
-  console.log(availableRides);
+  const {data:user}=useUserInfoQuery(undefined)
+  console.log(user);
   const handleAccept = async (rideId: string) => {
     try {
       const result = await acceptRide(rideId).unwrap();
@@ -45,7 +47,6 @@ const AcceptRide = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
   return (
     <div className="space-y-4 p-4  mx-auto">
       <h2 className="text-2xl font-bold flex items-center gap-2">
@@ -173,4 +174,4 @@ const AcceptRide = () => {
   );
 };
 
-export default AcceptRide;
+export default AvailableRides;

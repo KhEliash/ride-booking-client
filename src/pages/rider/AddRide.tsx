@@ -1,4 +1,4 @@
-import { RideBookingForm } from "@/components/modules/AddRide/AddRideForm";
+import { RideBookingForm } from "@/components/modules/Rider/AddRide/AddRideForm";
 
 const AddRide = () => {
   return (
