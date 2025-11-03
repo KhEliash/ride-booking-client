@@ -1,5 +1,4 @@
-import React from "react";
-import { Skeleton } from "@/components/ui/skeleton";
+ import { Skeleton } from "@/components/ui/skeleton";
 import {
   useDriverProfileQuery,
   useAvailabilityMutation,
@@ -10,7 +9,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 const Availability = () => {
   const { data: driver, isLoading } = useDriverProfileQuery(undefined);
   const [availability, { isLoading: updating }] = useAvailabilityMutation();
-
+  console.log(driver);
   if (isLoading)
     return (
       <Card className="max-w-md mx-auto mt-10 p-6">

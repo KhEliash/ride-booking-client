@@ -28,11 +28,12 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const AvailableRides = () => {
   const { data: availableRides, isLoading } = useAvailableRidesQuery(undefined);
   const [acceptRide] = useAcceptRideMutation();
-  const {data:user}=useUserInfoQuery(undefined)
+  const { data: user } = useUserInfoQuery(undefined);
   console.log(user);
   const handleAccept = async (rideId: string) => {
     try {
@@ -45,7 +46,12 @@ const AvailableRides = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
+      </div>
+    );
   }
   return (
     <div className="space-y-4 p-4  mx-auto">
