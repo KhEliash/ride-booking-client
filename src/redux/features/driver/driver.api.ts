@@ -23,27 +23,28 @@ export const driverApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["DRIVER"],
     }),
-    // availability: builder.mutation({
-    //   query: (info) => ({
-    //     url:  "/driver/availability",
-    //     method: "PATCH",
-    //     info
-    //   }),
-    //   invalidatesTags: ["DRIVER"],
-    // }),
-    // getRideById: builder.query({
-    //   query: (id) => ({
-    //     url: `/ride/${id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["RIDER"],
-    // }),
+    availability: builder.mutation({
+      query: (payload) => ({
+        url: "/driver/availability",
+        method: "PATCH",
+        data: payload,
+        headers: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["DRIVER"],
+    }),
+    getRideById: builder.query({
+      query: (id) => ({
+        url: `/ride/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["RIDER"],
+    }),
   }),
 });
 
-export const { 
-    useAvailableRidesQuery,
-    useAcceptRideMutation,
-    useDriverProfileQuery,
-    // useAvailabilityMutation
+export const {
+  useAvailableRidesQuery,
+  useAcceptRideMutation,
+  useDriverProfileQuery,
+  useAvailabilityMutation,
 } = driverApi;

@@ -1,10 +1,10 @@
 import AvailableRides from "@/components/modules/Driver/ManageRides/AvailableRides";
-// import Availablity from "@/components/modules/Driver/ManageRides/Availablity";
+import Availability from "@/components/modules/Driver/ManageRides/Availability";
 
 const ManageRides = () => {
   return (
     <>
-    {/* <Availablity/> */}
+      <Availability />
       <AvailableRides />
     </>
   );
