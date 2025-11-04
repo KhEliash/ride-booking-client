@@ -29,8 +29,7 @@ const Availability = () => {
   const { data: driver, isLoading } = useDriverProfileQuery(undefined);
   const { data: currentRide } = useCurrentRideQuery(undefined);
   const [availability, { isLoading: updating }] = useAvailabilityMutation();
-  const [statusUpdate] =
-    useUpdateRideStatusMutation();
+  const [statusUpdate] = useUpdateRideStatusMutation();
   const ride = currentRide?.data;
 
   const [status, setStatus] = useState("");

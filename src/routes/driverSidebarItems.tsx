@@ -1,4 +1,5 @@
- import ManageRides from "@/pages/driver/ManageRides";
+ import Earnings from "@/pages/driver/Earnings";
+import ManageRides from "@/pages/driver/ManageRides";
   import type { ISidebarItems } from "@/types";
 
 export const driverSidebarItems: ISidebarItems[] = [
@@ -9,6 +10,11 @@ export const driverSidebarItems: ISidebarItems[] = [
         title: "Manage Ride",
         url: "/driver/manage-rides",
         component: ManageRides,
+      },
+      {
+        title: "Earnings",
+        url: "/driver/earnings",
+        component: Earnings,
       },
     ],
   },
