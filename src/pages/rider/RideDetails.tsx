@@ -8,10 +8,17 @@ import {
   DollarSign,
   Calendar,
   Car,
+  Truck,
 } from "lucide-react";
 import { useGetRideByIdQuery } from "@/redux/features/rider/rider.api";
 
-type RideStatus = "pending" | "accepted" | "completed" | "cancelled";
+type RideStatus =
+  | "pending"
+  | "accepted"
+  | "completed"
+  | "cancelled"
+  | "in_transit"
+  | "picked_up";
 
 interface StatusDetails {
   icon: React.ElementType;
@@ -75,6 +82,20 @@ const getStatusDetails = (status: RideStatus): StatusDetails => {
         color: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
         text: "Cancelled",
       };
+    case "picked_up":
+      return {
+        icon: Truck,
+        color:
+          "bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300",
+        text: "Picked Up",
+      };
+    case "in_transit":
+      return {
+        icon: MapPin,
+        color:
+          "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300",
+        text: "In Transit",
+      };
     default:
       return {
         icon: Clock,
@@ -87,7 +108,6 @@ const getStatusDetails = (status: RideStatus): StatusDetails => {
   }
 };
 
-// Card Components with proper typing
 const Card = ({ children, className = "" }: CardProps) => (
   <div
     className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`}
@@ -121,6 +141,7 @@ const RideDetails = () => {
 
   const { data: apiResponse, isLoading, error } = useGetRideByIdQuery(id || "");
   const ride = apiResponse?.data;
+  console.log(ride);
 
   if (!id) {
     return (
@@ -166,7 +187,7 @@ const RideDetails = () => {
     icon: StatusIcon,
     color: statusColor,
     text: statusText,
-  } = getStatusDetails(ride.status);
+  } = getStatusDetails(ride?.status as RideStatus);
   const formattedFare = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -177,7 +198,7 @@ const RideDetails = () => {
   return (
     <div className="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8">
       {/* Header Grid */}
-       <header className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <header className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <div className="md:col-span-2">
           <h1 className="text-3xl font-bold tracking-tight dark:text-white">
             Ride Summary
@@ -356,6 +377,41 @@ const RideDetails = () => {
                       <div className="flex-1 pb-2">
                         <p className="text-xs font-semibold text-blue-700 dark:text-blue-300 uppercase tracking-wide">
                           Accepted
+                        </p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {formatDateTime(ride.acceptedAt)}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {["picked_up", "in_transit", "completed"].includes(
+                    ride.status
+                  ) && (
+                    <div className="flex items-start space-x-3 relative">
+                      <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center z-10">
+                        <Truck className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1 pb-2">
+                        <p className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 uppercase tracking-wide">
+                          Picked Up
+                        </p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {formatDateTime(ride.acceptedAt)}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* In Transit Timeline Item */}
+                  {["in_transit", "completed"].includes(ride.status) && (
+                    <div className="flex items-start space-x-3 relative">
+                      <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center z-10">
+                        <MapPin className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="flex-1 pb-2">
+                        <p className="text-xs font-semibold text-purple-700 dark:text-purple-300 uppercase tracking-wide">
+                          In Transit
                         </p>
                         <p className="text-sm text-muted-foreground mt-1">
                           {formatDateTime(ride.acceptedAt)}
