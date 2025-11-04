@@ -44,6 +44,14 @@ export const router = createBrowserRouter([
         Component: Contact,
         path: "contact",
       },
+      {
+        Component: Login,
+        path: "/login",
+      },
+      {
+        Component: Register,
+        path: "/register",
+      },
     ],
   },
   {
@@ -70,14 +78,7 @@ export const router = createBrowserRouter([
       ...generateRoutes(driverSidebarItems),
     ],
   },
-  {
-    Component: Login,
-    path: "/login",
-  },
-  {
-    Component: Register,
-    path: "/register",
-  },
+
   {
     Component: Unauthorized,
     path: "/unauthorized",

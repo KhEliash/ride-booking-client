@@ -140,7 +140,6 @@ const RideDetails = () => {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-xl font-medium text-muted-foreground">
             Loading ride details... 🚗
           </p>
@@ -178,7 +177,7 @@ const RideDetails = () => {
   return (
     <div className="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8">
       {/* Header Grid */}
-      <header className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+       <header className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <div className="md:col-span-2">
           <h1 className="text-3xl font-bold tracking-tight dark:text-white">
             Ride Summary

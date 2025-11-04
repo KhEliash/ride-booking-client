@@ -27,14 +27,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
-import { Skeleton } from "@/components/ui/skeleton";
+ import { Skeleton } from "@/components/ui/skeleton";
 
 const AvailableRides = () => {
   const { data: availableRides, isLoading } = useAvailableRidesQuery(undefined);
   const [acceptRide] = useAcceptRideMutation();
-  const { data: user } = useUserInfoQuery(undefined);
-  console.log(user);
+    
   const handleAccept = async (rideId: string) => {
     try {
       const result = await acceptRide(rideId).unwrap();

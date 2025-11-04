@@ -23,6 +23,17 @@ export const driverApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["DRIVER"],
     }),
+
+    updateRideStatus: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `/ride/update-ride-status/${id}`,
+        method: "PATCH",
+        data: payload,
+        headers: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["DRIVER"],
+    }),
+
     availability: builder.mutation({
       query: (payload) => ({
         url: "/driver/availability",
@@ -32,6 +43,15 @@ export const driverApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["DRIVER"],
     }),
+
+    currentRide: builder.query({
+      query: () => ({
+        url: "/ride/current-ride",
+        method: "GET",
+      }),
+      providesTags: ["DRIVER"],
+    }),
+
     getRideById: builder.query({
       query: (id) => ({
         url: `/ride/${id}`,
@@ -47,4 +67,6 @@ export const {
   useAcceptRideMutation,
   useDriverProfileQuery,
   useAvailabilityMutation,
+  useCurrentRideQuery,
+  useUpdateRideStatusMutation,
 } = driverApi;
