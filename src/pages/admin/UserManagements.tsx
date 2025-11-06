@@ -4,7 +4,9 @@ import { useState } from "react";
 import {
   useAllUsersQuery,
   useApproveDriverMutation,
+  useBlockUserMutation,
   useSuspendDriverMutation,
+  useUnblockUserMutation,
 } from "@/redux/features/admin/admin.api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +30,8 @@ const UserManagements = () => {
   const itemsPerPage = 10;
   const [approveDriver] = useApproveDriverMutation();
   const [suspendDriver] = useSuspendDriverMutation();
+  const [blockUser] = useBlockUserMutation();
+  const [unblockUser] = useUnblockUserMutation();
 
   if (isLoading)
     return <div className="text-center p-4 text-lg">Loading...</div>;
@@ -60,10 +64,24 @@ const UserManagements = () => {
 
   console.log(paginatedUsers);
 
-  const handleBlockToggle = (user: any) => {
-    console.log("blokc", user);
-    // const action = user.isBlocked ? "Unblocked" : "Blocked";
-    // alert(`${user.name} (${user.role}) has been ${action}.`);
+  const handleBlockToggle = async (user: any) => {
+    if (user.isBlocked === true) {
+      try {
+        const res = await unblockUser(user._id).unwrap();
+        toast.success(res?.data.message || "Unblocked successfully");
+      } catch (error: any) {
+        console.error(error);
+        toast.error(error?.data?.message || " Something went wrong");
+      }
+    } else {
+      try {
+        const res = await blockUser(user._id).unwrap();
+        toast.success(res?.data.message || "Blocked successfully");
+      } catch (error: any) {
+        console.error(error);
+        toast.error(error?.data?.message || " Something went wrong");
+      }
+    }
   };
 
   const handleApproveToggle = async (user: any) => {
@@ -71,7 +89,7 @@ const UserManagements = () => {
     if (user.isApproved === true) {
       try {
         const res = await suspendDriver(user._id).unwrap();
-        console.log(res);
+        toast.success(res?.data.message || "Suspend successfully");
       } catch (error: any) {
         console.error(error);
         toast.error(error?.data?.message || " Something went wrong");
@@ -85,9 +103,6 @@ const UserManagements = () => {
         toast.error(error?.data?.message || " Something went wrong");
       }
     }
-
-    // const action = user.isApproved ? "Approved" : "Suspended";
-    // alert(`Driver ${user.name} has been ${action}.`);
   };
 
   return (
@@ -181,6 +196,7 @@ const UserManagements = () => {
                           size="sm"
                           variant={user.isBlocked ? "default" : "destructive"}
                           onClick={() => handleBlockToggle(user)}
+                          className="cursor-pointer"
                         >
                           {user.isBlocked ? "Unblock" : "Block"}
                         </Button>
@@ -192,6 +208,7 @@ const UserManagements = () => {
                           size="sm"
                           variant={user.isApproved ? "destructive" : "default"}
                           onClick={() => handleApproveToggle(user)}
+                          className="cursor-pointer"
                         >
                           {user.isApproved ? "Suspend" : "Approve"}
                         </Button>

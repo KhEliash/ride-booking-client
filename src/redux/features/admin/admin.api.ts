@@ -24,6 +24,20 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["ADMIN"],
     }),
+    blockUser: builder.mutation({
+      query: (id) => ({
+        url: `/user/block/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["ADMIN"],
+    }),
+    unblockUser: builder.mutation({
+      query: (id) => ({
+        url: `/user/unblock/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["ADMIN"],
+    }),
 
     // acceptRide: builder.mutation({
     //   query: (id: string) => ({
@@ -39,4 +53,6 @@ export const {
   useAllUsersQuery,
   useSuspendDriverMutation,
   useApproveDriverMutation,
+  useUnblockUserMutation,
+  useBlockUserMutation
 } = adminApi;
