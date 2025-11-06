@@ -6,7 +6,7 @@ const RideHistory = lazy(() => import("@/pages/rider/RideHistory"));
 
 export const riderSidebarItems: ISidebarItems[] = [
   {
-    title: "Rider",
+    title: "Actionable Dashboard",
     items: [
       {
         title: "Book Ride",

@@ -11,6 +11,7 @@ import {
   Truck,
 } from "lucide-react";
 import { useGetRideByIdQuery } from "@/redux/features/rider/rider.api";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type RideStatus =
   | "pending"
@@ -159,12 +160,15 @@ const RideDetails = () => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="text-center">
-          <p className="mt-4 text-xl font-medium text-muted-foreground">
-            Loading ride details... 🚗
-          </p>
+      <div className="p-4 shadow-sm ">
+        <div className="flex items-center gap-4">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-4 w-3/4 rounded" />
+            <Skeleton className="h-3 w-1/2 rounded" />
+          </div>
         </div>
+        <Skeleton className="mt-4 h-3 w-full rounded" />
       </div>
     );
 
@@ -219,8 +223,8 @@ const RideDetails = () => {
         {/* Left Column - Route & Fare */}
         <div className="lg:col-span-2 space-y-6">
           {/* Fare Card */}
-          <Card className="shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-800 dark:border-gray-700">
-            <CardContent className="p-6">
+          <Card className="shadow-md transition-all duration-300 hover:shadow-xl dark:bg-gray-800 dark:border-gray-700">
+            <CardContent className="p-6 pt-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="p-3 bg-primary/10 rounded-lg">

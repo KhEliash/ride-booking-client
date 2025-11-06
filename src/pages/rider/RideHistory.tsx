@@ -128,12 +128,12 @@ const RideHistory = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-xl font-semibold">🚗 Ride History</h1>
+      <h1 className="text-2xl font-bold">🚗 Ride History</h1>
 
       {/*  Filters */}
       <div className="grid md:grid-cols-3 gap-4 items-end">
         <div>
-          <Label>Search (pickup/destination)</Label>
+          <Label className="mb-2">Search (pickup/destination)</Label>
           <Input
             placeholder="Search..."
             value={search}
@@ -145,7 +145,7 @@ const RideHistory = () => {
         </div>
 
         <div>
-          <Label>Status</Label>
+          <Label className="mb-2">Status</Label>
           <Select
             onValueChange={(val) => {
               setStatus(val);
@@ -165,7 +165,7 @@ const RideHistory = () => {
 
         <div className="flex gap-2">
           <div className="flex-1">
-            <Label>From</Label>
+            <Label className="mb-2">From</Label>
             <Input
               type="date"
               value={dateFrom}
@@ -175,8 +175,8 @@ const RideHistory = () => {
               }}
             />
           </div>
-          <div className="flex-1">
-            <Label>To</Label>
+          <div className ="flex-1">
+            <Label className="mb-2">To</Label>
             <Input
               type="date"
               value={dateTo}
@@ -190,9 +190,10 @@ const RideHistory = () => {
 
         <div className="flex gap-2">
           <div className="flex-1">
-            <Label>Min Fare</Label>
+            <Label className="mb-2">Min Fare</Label>
             <Input
               type="number"
+              placeholder="0"
               value={minFare}
               onChange={(e) => {
                 setMinFare(e.target.value);
@@ -201,9 +202,10 @@ const RideHistory = () => {
             />
           </div>
           <div className="flex-1">
-            <Label>Max Fare</Label>
+            <Label className="mb-2">Max Fare</Label>
             <Input
               type="number"
+              placeholder="0"
               value={maxFare}
               onChange={(e) => {
                 setMaxFare(e.target.value);
@@ -218,7 +220,7 @@ const RideHistory = () => {
       <div className="border rounded-md overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-gray-100">
               <TableHead>#</TableHead>
               <TableHead>Pickup</TableHead>
               <TableHead>Destination</TableHead>

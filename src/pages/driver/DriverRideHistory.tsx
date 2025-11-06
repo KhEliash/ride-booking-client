@@ -43,9 +43,9 @@ const DriverRideHistory = () => {
   );
 
   return (
-    <Card className="p-4 m-4">
+    <Card className="py-4  border-none shadow-none">
       <CardHeader>
-        <CardTitle className="text-xl font-semibold">Ride History</CardTitle>
+        <CardTitle className="text-2xl font-bold">📓 Ride History</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between mb-4">
@@ -61,7 +61,7 @@ const DriverRideHistory = () => {
         <div className="overflow-x-auto rounded-md border">
           <Table>
             <TableHeader>
-              <TableRow>
+              <TableRow className="bg-gray-100">
                 <TableHead>Pickup</TableHead>
                 <TableHead>Destination</TableHead>
                 <TableHead>Rider</TableHead>

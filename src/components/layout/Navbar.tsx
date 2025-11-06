@@ -20,8 +20,8 @@ import {
 import { toast } from "sonner";
 import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants/role";
+import logo from "@/assets/images/SwiftGo.png";
 
-// Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: "/", label: "Home", role: "public" },
   { href: "/about", label: "About", role: "public" },
@@ -51,6 +51,7 @@ export default function Navbar() {
     <header className="border-b px-4 md:px-6 flex  justify-center sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-black/70">
       <div className="flex h-16 items-center justify-between gap-4 container">
         {/* Left side */}
+        <img src={logo} alt="Swift Go" className="w-16" />
         <div className="flex items-center gap-2">
           {/* Mobile menu trigger */}
           <Popover>

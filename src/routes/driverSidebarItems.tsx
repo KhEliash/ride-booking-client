@@ -9,7 +9,7 @@ const ManageRides = lazy(() => import("@/pages/driver/ManageRides"));
 
 export const driverSidebarItems: ISidebarItems[] = [
   {
-    title: "driver",
+    title: "Action Dashboard",
     items: [
       {
         title: "Manage Ride",

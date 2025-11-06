@@ -41,15 +41,16 @@ const Availability = () => {
 
   if (isLoading)
     return (
-      <Card className="max-w-md mx-auto mt-10 p-6">
-        <CardHeader>
-          <Skeleton className="h-6 w-1/2 mb-4" />
-        </CardHeader>
-        <CardContent>
-          <Skeleton className="h-6 w-full mb-3" />
-          <Skeleton className="h-10 w-full rounded-lg" />
-        </CardContent>
-      </Card>
+      <div className="p-4 shadow-sm ">
+        <div className="flex items-center gap-4">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-4 w-3/4 rounded" />
+            <Skeleton className="h-3 w-1/2 rounded" />
+          </div>
+        </div>
+        <Skeleton className="mt-4 h-3 w-full rounded" />
+      </div>
     );
 
   const isOnline =
@@ -89,7 +90,9 @@ const Availability = () => {
       <div className="col-span-1">
         <Card className="">
           <CardHeader>
-            <CardTitle className="text-center">Driver Availability</CardTitle>
+            <CardTitle className="text-center text-xl font-bold">
+              Driver Availability
+            </CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col items-center space-y-4">
             <div className="flex items-center space-x-3">
@@ -106,7 +109,7 @@ const Availability = () => {
             <div className="flex flex-col items-center w-full">
               <label
                 htmlFor="availability"
-                className="block text-sm font-medium text-gray-600 mb-2"
+                className="block text-sm font-medium mb-2"
               >
                 Change Availability
               </label>

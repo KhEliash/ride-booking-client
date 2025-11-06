@@ -96,7 +96,7 @@ export function RideBookingForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="shadow-lg">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+          <CardTitle className="flex items-center gap-2 text-2xl font-bold">
             <Car className="w-5 h-5 text-primary" /> Book Your Ride
           </CardTitle>
           <CardDescription>
