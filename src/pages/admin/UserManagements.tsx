@@ -21,6 +21,7 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const UserManagements = () => {
   const { data: allUsers, isLoading } = useAllUsersQuery(undefined);
@@ -34,7 +35,16 @@ const UserManagements = () => {
   const [unblockUser] = useUnblockUserMutation();
 
   if (isLoading)
-    return <div className="text-center p-4 text-lg">Loading...</div>;
+    return  <div className="p-4 shadow-sm ">
+        <div className="flex items-center gap-4">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-4 w-3/4 rounded" />
+            <Skeleton className="h-3 w-1/2 rounded" />
+          </div>
+        </div>
+        <Skeleton className="mt-4 h-3 w-full rounded" />
+      </div>;
 
   const users = allUsers?.data || [];
 
@@ -62,7 +72,7 @@ const UserManagements = () => {
     page * itemsPerPage
   );
 
-  console.log(paginatedUsers);
+ 
 
   const handleBlockToggle = async (user: any) => {
     if (user.isBlocked === true) {
@@ -106,9 +116,9 @@ const UserManagements = () => {
   };
 
   return (
-    <Card className="p-4 m-4">
+    <Card className=" my-6 border border-none shadow-none p-0">
       <CardHeader>
-        <CardTitle className="text-xl font-semibold">User Management</CardTitle>
+        <CardTitle className="text-2xl font-bold">📝 User Management</CardTitle>
       </CardHeader>
 
       <CardContent>

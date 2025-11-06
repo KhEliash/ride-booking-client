@@ -191,6 +191,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -244,14 +245,26 @@ const RideOversight = () => {
     setPage(1);
   };
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="p-4 shadow-sm ">
+        <div className="flex items-center gap-4">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-4 w-3/4 rounded" />
+            <Skeleton className="h-3 w-1/2 rounded" />
+          </div>
+        </div>
+        <Skeleton className="mt-4 h-3 w-full rounded" />
+      </div>
+    );
 
   return (
     <div className="p-6 space-y-5">
-      <h2 className="text-2xl font-semibold"> Ride Oversight</h2>
+      <h2 className="text-2xl font-bold">🪧 Ride Oversight</h2>
 
       {/* Filters Section */}
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-2">
         <div className="flex flex-col">
           <h2 className="text-sm font-medium">Search</h2>
           <Input
@@ -311,10 +324,10 @@ const RideOversight = () => {
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border shadow-md bg-white">
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-gray-200 ">
               <TableHead>Rider</TableHead>
               <TableHead>Driver</TableHead>
               <TableHead>Pickup → Destination</TableHead>
@@ -336,7 +349,7 @@ const RideOversight = () => {
                     {ride.pickupLocation.address} → {ride.destination.address}
                   </TableCell>
                   <TableCell className="capitalize">{ride.status}</TableCell>
-                  <TableCell>৳{ride.fare}</TableCell>
+                  <TableCell>৳ {ride.fare}</TableCell>
                   <TableCell>
                     {new Date(ride.createdAt).toLocaleDateString()}
                   </TableCell>

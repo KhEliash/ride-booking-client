@@ -10,13 +10,26 @@ import { BarChart, Users, Car, DollarSign } from "lucide-react";
 import RideVolumeChart from "@/components/modules/admin/analytics/RideVolumeChart ";
 import RevenueChart from "@/components/modules/admin/analytics/RevenueChart ";
 import DriverActivityChart from "@/components/modules/admin/analytics/DriverActivityChart";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Analytics = () => {
   const { data: allUsers } = useAllUsersQuery(undefined);
   const { data: allRides } = useAllRidesQuery(undefined);
   const { data: allDrivers, isLoading } = useAllDriversQuery(undefined);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="p-4 shadow-sm ">
+        <div className="flex items-center gap-4">
+          <Skeleton className="h-10 w-10 rounded-full" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-4 w-3/4 rounded" />
+            <Skeleton className="h-3 w-1/2 rounded" />
+          </div>
+        </div>
+        <Skeleton className="mt-4 h-3 w-full rounded" />
+      </div>
+    );
 
   const totalUsers = allUsers?.meta?.total || 0;
   const totalDrivers = allDrivers?.data?.length || 0;

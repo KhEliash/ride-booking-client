@@ -7,7 +7,7 @@ const RideOversight = lazy(() => import("@/pages/admin/RideOversight"));
 
 export const adminSidebarItems: ISidebarItems[] = [
   {
-    title: "Getting Started",
+    title: "Admin Functionality",
     items: [
       {
         title: "Analytics",

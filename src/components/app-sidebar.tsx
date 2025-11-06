@@ -15,8 +15,7 @@ import {
 import { Link } from "react-router";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
-
-// This is sample data.
+import logo from "@/assets/images/SwiftGo.png";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userData } = useUserInfoQuery(undefined);
@@ -27,7 +26,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <Link to={"/"}>Home</Link>
+        <Link to={"/"}>
+          <img src={logo} alt="SwiftGo" className="h-10 w-auto ml-3 mt-3" />
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
@@ -37,7 +38,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem
+                    key={item.title}
+                    className="text-2xl font-medium"
+                  >
                     <SidebarMenuButton asChild>
                       <Link to={item.url}>{item.title}</Link>
                     </SidebarMenuButton>
