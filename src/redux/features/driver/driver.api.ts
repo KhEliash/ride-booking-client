@@ -59,7 +59,7 @@ export const driverApi = baseApi.injectEndpoints({
       }),
       providesTags: ["RIDER"],
     }),
-    rideHistory: builder.query({
+    driverRideHistory: builder.query({
       query: ( ) => ({
         url: "/ride/driver-history",
         method: "GET",
@@ -79,5 +79,5 @@ export const {
   useAvailabilityMutation,
   useCurrentRideQuery,
   useUpdateRideStatusMutation,
-  useRideHistoryQuery
+ useDriverRideHistoryQuery
 } = driverApi;

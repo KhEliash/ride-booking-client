@@ -1,4 +1,5 @@
- import UserManagements from "@/pages/admin/UserManagements";
+ import RideOversight from "@/pages/admin/RideOversight";
+import UserManagements from "@/pages/admin/UserManagements";
 import type { ISidebarItems } from "@/types";
 import { lazy } from "react";
 
@@ -20,8 +21,8 @@ export const adminSidebarItems: ISidebarItems[] = [
       },
       {
         title: "Ride Oversight",
-        url: "/admin/analytics",
-        component: Analytics,
+        url: "/admin/ride-oversight",
+        component: RideOversight,
       },
     ],
   },

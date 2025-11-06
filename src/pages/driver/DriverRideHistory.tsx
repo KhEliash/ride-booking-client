@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { useRideHistoryQuery } from "@/redux/features/driver/driver.api";
 import {
   Table,
   TableBody,
@@ -12,9 +11,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useDriverRideHistoryQuery } from "@/redux/features/driver/driver.api";
 
 const DriverRideHistory = () => {
-  const { data: rideHistory, isLoading } = useRideHistoryQuery(undefined);
+  const { data: rideHistory, isLoading } = useDriverRideHistoryQuery(undefined);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;

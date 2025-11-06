@@ -9,6 +9,13 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["ADMIN"],
     }),
+    allRides: builder.query({
+      query: () => ({
+        url: "/ride/all-rides",
+        method: "GET",
+      }),
+      providesTags: ["ADMIN"],
+    }),
 
     approveDriver: builder.mutation({
       query: (id) => ({
@@ -54,5 +61,6 @@ export const {
   useSuspendDriverMutation,
   useApproveDriverMutation,
   useUnblockUserMutation,
-  useBlockUserMutation
+  useBlockUserMutation,
+  useAllRidesQuery
 } = adminApi;
