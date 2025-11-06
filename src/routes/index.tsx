@@ -18,11 +18,13 @@ import Features from "@/pages/Features";
 import Faq from "@/pages/Faq";
 import Contact from "@/pages/Contact";
 import RideDetails from "@/pages/rider/RideDetails";
+import ErrorState from "@/pages/Error";
 
 export const router = createBrowserRouter([
   {
     Component: App,
     path: "/",
+    errorElement: <ErrorState/>,
     children: [
       {
         index: true,
