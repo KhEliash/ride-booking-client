@@ -1,6 +1,8 @@
-import AddRide from "@/pages/rider/AddRide";
-import RideHistory from "@/pages/rider/RideHistory";
 import type { ISidebarItems } from "@/types";
+import { lazy } from "react";
+
+const AddRide = lazy(() => import("@/pages/rider/AddRide"));
+const RideHistory = lazy(() => import("@/pages/rider/RideHistory"));
 
 export const riderSidebarItems: ISidebarItems[] = [
   {
