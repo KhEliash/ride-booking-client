@@ -9,6 +9,13 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       providesTags: ["ADMIN"],
     }),
+    allDrivers: builder.query({
+      query: () => ({
+        url: "/driver/allDrivers",
+        method: "GET",
+      }),
+      providesTags: ["ADMIN"],
+    }),
     allRides: builder.query({
       query: () => ({
         url: "/ride/all-rides",
@@ -45,14 +52,6 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["ADMIN"],
     }),
-
-    // acceptRide: builder.mutation({
-    //   query: (id: string) => ({
-    //     url: `ride/accept-ride/${id}`,
-    //     method: "POST",
-    //   }),
-    //   invalidatesTags: ["ADMIN"],
-    // }),
   }),
 });
 
@@ -62,5 +61,6 @@ export const {
   useApproveDriverMutation,
   useUnblockUserMutation,
   useBlockUserMutation,
-  useAllRidesQuery
+  useAllRidesQuery,
+  useAllDriversQuery
 } = adminApi;

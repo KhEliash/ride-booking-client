@@ -1,9 +1,9 @@
- import RideOversight from "@/pages/admin/RideOversight";
-import UserManagements from "@/pages/admin/UserManagements";
 import type { ISidebarItems } from "@/types";
 import { lazy } from "react";
 
- const Analytics = lazy(()=>import ("@/pages/admin/Analytics"))
+const Analytics = lazy(() => import("@/pages/admin/Analytics"));
+const UserManagements = lazy(() => import("@/pages/admin/UserManagements"));
+const RideOversight = lazy(() => import("@/pages/admin/RideOversight"));
 
 export const adminSidebarItems: ISidebarItems[] = [
   {
@@ -26,5 +26,4 @@ export const adminSidebarItems: ISidebarItems[] = [
       },
     ],
   },
-  
 ];
