@@ -10,6 +10,21 @@ export const adminApi = baseApi.injectEndpoints({
       providesTags: ["ADMIN"],
     }),
 
+    approveDriver: builder.mutation({
+      query: (id) => ({
+        url: `/user/approve/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["ADMIN"],
+    }),
+    suspendDriver: builder.mutation({
+      query: (id) => ({
+        url: `/user/suspend/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["ADMIN"],
+    }),
+
     // acceptRide: builder.mutation({
     //   query: (id: string) => ({
     //     url: `ride/accept-ride/${id}`,
@@ -20,4 +35,8 @@ export const adminApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAllUsersQuery } = adminApi;
+export const {
+  useAllUsersQuery,
+  useSuspendDriverMutation,
+  useApproveDriverMutation,
+} = adminApi;
