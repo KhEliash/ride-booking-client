@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
 
 const FAQ_DATA = {
   RIDER: [
@@ -66,8 +67,7 @@ const Faq = () => {
         </section>
 
         {/* FAQ Accordion Section */}
-        <section className="py-20 md:py-32 bg-secondary/10 dark:bg-secondary/20">
-          {/* Rider FAQs */}
+        <section className="py-20 md:py-32 ">
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-8">
             <span className="text-primary">Rider</span> Questions
           </h2>
@@ -130,9 +130,11 @@ const Faq = () => {
                 Our dedicated support team is available 24/7 to help you with
                 any specific questions or concerns.
               </p>
-              <Button size="lg" className="shadow-lg">
-                Contact Customer Support
-              </Button>
+              <Link to={"/contact"}>
+                <Button size="lg" className="shadow-lg cursor-pointer">
+                  Contact Customer Support
+                </Button>
+              </Link>
             </Card>
           </div>
         </section>
