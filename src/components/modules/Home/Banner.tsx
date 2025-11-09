@@ -4,6 +4,7 @@ import banner from "@/assets/images/banner.png";
 import { Link } from "react-router";
 
 const Banner = () => {
+  
   return (
     <>
       <section className="relative container overflow-hidden ">
@@ -20,7 +21,7 @@ const Banner = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4 md:justify-start">
-              <Link to={"/login"}>
+              <Link to={"/rider/add-ride"}>
                 <Button size="lg" className="flex items-center gap-2">
                   Book a Ride <ArrowRight className="h-4 w-4" />
                 </Button>

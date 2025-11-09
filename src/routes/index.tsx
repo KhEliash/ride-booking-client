@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
   {
     Component: App,
     path: "/",
-    errorElement: <ErrorState/>,
+    errorElement: <ErrorState />,
     children: [
       {
         index: true,
@@ -53,6 +53,10 @@ export const router = createBrowserRouter([
       {
         Component: Register,
         path: "/register",
+      },
+      {
+        Component: RideDetails,
+        path: "/ride-details/:id",
       },
     ],
   },
@@ -84,9 +88,5 @@ export const router = createBrowserRouter([
   {
     Component: Unauthorized,
     path: "/unauthorized",
-  },
-  {
-    Component: RideDetails,
-    path: "/ride-details/:id",
   },
 ]);
