@@ -1,6 +1,8 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router";
 
 const About = () => {
   return (
@@ -23,7 +25,7 @@ const About = () => {
             </div>
           </section>
 
-          <section className="py-20 md:py-32 bg-secondary/50 dark:bg-secondary/30">
+          <section className="py-20 md:py-32 ">
             <div className="  grid lg:grid-cols-2 gap-12 items-start">
               {/* Left Column: Background & History */}
               <div>
@@ -132,11 +134,10 @@ const About = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {/* Team Member 1 */}
               <div className="text-center">
-                {/* <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-primary shadow-lg">
-                    {/* Replace with actual image path */}
-                {/* <AvatarImage src="/team/founder.jpg" alt="CEO Avatar" /> 
-                    <AvatarFallback>JD</AvatarFallback>
-                </Avatar> */}
+                <Avatar className="w-24 h-24 mx-auto mb-4 border-2  shadow-lg">
+                  <AvatarImage src="/team/founder.jpg" alt="CEO Avatar" />
+                  <AvatarFallback>JD</AvatarFallback>
+                </Avatar>
                 <h3 className="text-xl font-bold">Jane Doe</h3>
                 <p className="text-sm text-primary">Chief Executive Officer</p>
                 <p className="text-xs text-muted-foreground mt-2">
@@ -146,10 +147,10 @@ const About = () => {
 
               {/* Team Member 2 */}
               <div className="text-center">
-                {/* <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-border shadow-lg">
-                    <AvatarImage src="/team/cto.jpg" alt="CTO Avatar" />
-                    <AvatarFallback>AS</AvatarFallback>
-                </Avatar> */}
+                <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-border shadow-lg">
+                  <AvatarImage src="/team/cto.jpg" alt="CTO Avatar" />
+                  <AvatarFallback>AS</AvatarFallback>
+                </Avatar>
                 <h3 className="text-xl font-bold">Alex Smith</h3>
                 <p className="text-sm text-muted-foreground">
                   Chief Technology Officer
@@ -162,10 +163,10 @@ const About = () => {
 
               {/* Team Member 3 */}
               <div className="text-center">
-                {/* <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-border shadow-lg">
-                    <AvatarImage src="/team/ops.jpg" alt="Head of Ops Avatar" />
-                    <AvatarFallback>MR</AvatarFallback>
-                </Avatar> */}
+                <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-border shadow-lg">
+                  <AvatarImage src="/team/ops.jpg" alt="Head of Ops Avatar" />
+                  <AvatarFallback>MR</AvatarFallback>
+                </Avatar>
                 <h3 className="text-xl font-bold">Maria Rodriguez</h3>
                 <p className="text-sm text-muted-foreground">
                   Head of Operations
@@ -178,10 +179,13 @@ const About = () => {
 
               {/* Team Member 4 */}
               <div className="text-center">
-                {/* <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-border shadow-lg">
-                    <AvatarImage src="/team/marketing.jpg" alt="Marketing Lead Avatar" />
-                    <AvatarFallback>TL</AvatarFallback>
-                </Avatar> */}
+                <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-border shadow-lg">
+                  <AvatarImage
+                    src="/team/marketing.jpg"
+                    alt="Marketing Lead Avatar"
+                  />
+                  <AvatarFallback>TL</AvatarFallback>
+                </Avatar>
                 <h3 className="text-xl font-bold">Tom Lee</h3>
                 <p className="text-sm text-muted-foreground">
                   Marketing Director
@@ -198,9 +202,11 @@ const About = () => {
               <p className="text-lg text-foreground mb-4">
                 Have questions about our team or company?
               </p>
-              <Button size="lg" className="shadow-lg">
-                Contact Us Today
-              </Button>
+              <Link to={"/contact"}>
+                <Button size="lg" className="shadow-lg cursor-pointer">
+                  Contact Us Today
+                </Button>
+              </Link>
             </div>
           </section>
         </div>
