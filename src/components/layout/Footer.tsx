@@ -1,10 +1,13 @@
+import image from "@/assets/images/SwiftGo.png";
 export default function Footer() {
   return (
     <footer className="border-t">
       <div className="mx-auto container space-y-8 px-4 py-16 lg:space-y-16">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
-            <div className="flex items-center gap-3">{/* <Logo /> */}</div>
+            <div className="flex items-center gap-3">
+              <img src={image} alt="Swift go" className="w-28 rounded-2xl"/>
+            </div>
 
             <p className="mt-4 max-w-xs text-muted-foreground">
               Book your ride, land in your destination and become part of out
