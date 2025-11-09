@@ -61,7 +61,7 @@ const DriverRideHistory = () => {
         <div className="overflow-x-auto rounded-md border">
           <Table>
             <TableHeader>
-              <TableRow className="bg-gray-100">
+              <TableRow className="bg-gray-100 dark:bg-background">
                 <TableHead>Pickup</TableHead>
                 <TableHead>Destination</TableHead>
                 <TableHead>Rider</TableHead>

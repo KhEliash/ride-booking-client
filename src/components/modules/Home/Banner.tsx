@@ -2,9 +2,15 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import banner from "@/assets/images/banner.png";
 import { Link } from "react-router";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 const Banner = () => {
-  
+  const { data, isLoading } = useUserInfoQuery(undefined);
+  console.log(data?.data?.role);
+  const user = data?.data;
+  if (isLoading) {
+    <p>Loading</p>;
+  }
   return (
     <>
       <section className="relative container overflow-hidden ">
@@ -21,11 +27,52 @@ const Banner = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4 md:justify-start">
-              <Link to={"/rider/add-ride"}>
-                <Button size="lg" className="flex items-center gap-2">
-                  Book a Ride <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
+              {user?.role === "admin" && (
+                <Link to={"/admin/analytics"}>
+                  <Button
+                    size="lg"
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    Analytics <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
+
+              {user?.role === "driver" && (
+                <Link to={"/driver/manage-rides"}>
+                  <Button
+                    size="lg"
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    Accept a ride <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
+
+              {user?.role == "rider" && (
+                <Link to={"/driver/manage-rides"}>
+                  <Link to={"/rider/add-ride"}>
+                    <Button
+                      size="lg"
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
+                      Book a Ride <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </Link>
+              )}
+              {!user && (
+                <Link to={"/driver/manage-rides"}>
+                  <Link to={"/rider/add-ride"}>
+                    <Button
+                      size="lg"
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
+                      Book a Ride <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </Link>
+              )}
 
               <Link to={"/about"}>
                 <Button size="lg" variant="outline" className="cursor-pointer">
@@ -40,7 +87,7 @@ const Banner = () => {
             <img
               src={banner}
               alt="Rider on scooter"
-              className="mx-auto md:w-[720px] md:h-[400px]  shadow-lg rounded-2xl"
+              className="mx-auto md:w-[720px] lg:h-[400px]  shadow-lg rounded-2xl"
             />
           </div>
         </div>

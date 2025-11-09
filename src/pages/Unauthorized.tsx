@@ -1,8 +1,11 @@
 import React from "react";
 import { ShieldAlert } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Link  } from "react-router";
+import { Button } from "@/components/ui/button";
 
 const Unauthorized: React.FC = () => {
+  
   return (
     <div className="flex justify-center items-center h-screen w-full bg-muted/30">
       <Card className="w-[380px] text-center p-6 shadow-lg">
@@ -16,6 +19,11 @@ const Unauthorized: React.FC = () => {
           <p className="text-gray-600 text-sm">
             You do not have permission to view this page.
           </p>
+          <Link to={"/"}>
+          <Button className="cursor-pointer">
+            Home
+          </Button>
+          </Link>
         </CardContent>
       </Card>
     </div>

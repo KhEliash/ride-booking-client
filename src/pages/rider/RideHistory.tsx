@@ -57,7 +57,7 @@ type Ride = {
 };
 
 const RideHistory = () => {
-  const { data, error, isLoading,refetch } = useRideHistoryQuery(undefined);
+  const { data, error, isLoading, refetch } = useRideHistoryQuery(undefined);
   const allRides: Ride[] = data?.data || [];
 
   // Filters and pagination state
@@ -96,13 +96,13 @@ const RideHistory = () => {
   const totalPages = Math.ceil(filteredRides.length / limit);
 
   const [cancelRide] = useCancelRideMutation();
-  const navigate =useNavigate()
+  const navigate = useNavigate();
 
   const handleCancelRide = async (id: string) => {
     try {
       const res = await cancelRide(id).unwrap();
       toast.success(res.message || "Ride cancelled successfully!");
-      refetch()
+      refetch();
     } catch (err: any) {
       toast.error(err?.data?.message || "Failed to cancel ride");
     }
@@ -175,7 +175,7 @@ const RideHistory = () => {
               }}
             />
           </div>
-          <div className ="flex-1">
+          <div className="flex-1">
             <Label className="mb-2">To</Label>
             <Input
               type="date"
@@ -220,7 +220,7 @@ const RideHistory = () => {
       <div className="border rounded-md overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow className="bg-gray-100">
+            <TableRow className="bg-gray-100 dark:bg-background">
               <TableHead>#</TableHead>
               <TableHead>Pickup</TableHead>
               <TableHead>Destination</TableHead>
@@ -250,13 +250,14 @@ const RideHistory = () => {
                     {new Date(ride.requestedAt).toLocaleString()}
                   </TableCell>
                   <TableCell className="flex justify-center cursor-pointer text-blue-500">
-                     <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleViewDetails(ride._id)}
-                      >
-                        <Eye className="text-blue-500 " />
-                      </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="cursor-pointer"
+                      onClick={() => handleViewDetails(ride._id)}
+                    >
+                      <Eye className="text-blue-500 " />
+                    </Button>
                   </TableCell>
                   <TableCell>
                     {ride.status === "requested" ? (

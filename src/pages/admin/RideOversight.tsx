@@ -327,7 +327,7 @@ const RideOversight = () => {
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            <TableRow className="bg-gray-200 ">
+            <TableRow className="bg-gray-200 dark:bg-background">
               <TableHead>Rider</TableHead>
               <TableHead>Driver</TableHead>
               <TableHead>Pickup → Destination</TableHead>

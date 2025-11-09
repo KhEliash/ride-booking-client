@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import image from "@/assets/images/feature.png";
 import { Link } from "react-router";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 interface Feature {
   icon: LucideIcon;
@@ -85,6 +86,7 @@ const FeatureCard: React.FC<Feature> = ({ icon: Icon, title, description }) => (
 );
 
 const Features: React.FC = () => {
+  const { data } = useUserInfoQuery(undefined);
   return (
     <div className="space-y-24 flex items-center justify-center">
       <div className="space-y-24 container ">
@@ -205,36 +207,38 @@ const Features: React.FC = () => {
           </div>
         </section>
 
-        <section className="py-20 bg-secondary rounded-md text-secondary-foreground text-center">
-          <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
-            Ready to Experience the Difference?
-          </h2>
-          <p className="text-lg md:text-xl mb-10 max-w-3xl mx-auto opacity-95 font-light">
-            Seamless rides, flexible earnings. Download the app today and join
-            our community!
-          </p>
+        {!data && (
+          <section className="py-20 bg-secondary rounded-md text-secondary-foreground text-center">
+            <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
+              Ready to Experience the Difference?
+            </h2>
+            <p className="text-lg md:text-xl mb-10 max-w-3xl mx-auto opacity-95 font-light">
+              Seamless rides, flexible earnings. Download the app today and join
+              our community!
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to={"/rider/add-ride"}>
-              <Button
-                variant="default"
-                size="lg"
-                className="px-10 py-3 rounded-full text-secondary font-semibold shadow-2xl hover:scale-[1.03] transition-transform duration-300"
-              >
-                Book Your First Ride ➡️
-              </Button>
-            </Link>
-            <Link to={"/register"}>
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-10 py-3 rounded-full border-2 border-secondary-foreground text-secondary-foreground hover:bg-secondary-foreground/20 hover:text-white transition-all duration-300 font-semibold"
-              >
-                Join Our Driver Network
-              </Button>
-            </Link>
-          </div>
-        </section>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link to={"/rider/add-ride"}>
+                <Button
+                  variant="default"
+                  size="lg"
+                  className="px-10 py-3 rounded-full text-secondary font-semibold shadow-2xl hover:scale-[1.03] transition-transform duration-300"
+                >
+                  Book Your First Ride ➡️
+                </Button>
+              </Link>
+              <Link to={"/register"}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-10 py-3 rounded-full border-2 border-secondary-foreground text-secondary-foreground hover:bg-secondary-foreground/20 hover:text-white transition-all duration-300 font-semibold"
+                >
+                  Join Our Driver Network
+                </Button>
+              </Link>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

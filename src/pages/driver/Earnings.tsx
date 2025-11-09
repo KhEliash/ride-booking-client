@@ -112,37 +112,33 @@ const Earnings = () => {
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        <div className="p-4 bg-white rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500">Total Earnings</h3>
-          <p className="mt-2 text-2xl font-bold text-gray-900">
-            {totalEarnings}
-          </p>
+        <div className="p-4 bg-background rounded-lg shadow">
+          <h3 className="text-sm font-medium ">Total Earnings</h3>
+          <p className="mt-2 text-2xl font-bold ">{totalEarnings}</p>
         </div>
 
-        <div className="p-4 bg-white rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500">Average Fare</h3>
-          <p className="mt-2 text-2xl font-bold text-gray-900">
-            {averageFare.toFixed(2)}
-          </p>
+        <div className="p-4 bg-background rounded-lg shadow">
+          <h3 className="text-sm font-medium  ">Average Fare</h3>
+          <p className="mt-2 text-2xl font-bold  ">{averageFare.toFixed(2)}</p>
         </div>
 
-        <div className="p-4 bg-white rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500">Best Day</h3>
-          <p className="mt-2 text-lg text-gray-900">
+        <div className="p-4 bg-background rounded-lg shadow">
+          <h3 className="text-sm font-medium  ">Best Day</h3>
+          <p className="mt-2 text-lg  ">
             {bestDay[0]}: **{bestDay[1]}**
           </p>
         </div>
 
-        <div className="p-4 bg-white rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500">Best Week</h3>
-          <p className="mt-2 text-lg text-gray-900">
+        <div className="p-4 bg-background rounded-lg shadow">
+          <h3 className="text-sm font-medium  ">Best Week</h3>
+          <p className="mt-2 text-lg  ">
             {bestWeek[0]}: **{bestWeek[1]}**
           </p>
         </div>
 
-        <div className="p-4 bg-white rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500">Best Month</h3>
-          <p className="mt-2 text-lg text-gray-900">
+        <div className="p-4 bg-background rounded-lg shadow">
+          <h3 className="text-sm font-medium  ">Best Month</h3>
+          <p className="mt-2 text-lg  ">
             {bestMonth[0]}: **{bestMonth[1]}**
           </p>
         </div>

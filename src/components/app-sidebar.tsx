@@ -27,7 +27,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar {...props}>
       <SidebarHeader>
         <Link to={"/"}>
-          <img src={logo} alt="SwiftGo" className="h-10 w-auto ml-3 mt-3" />
+          <img src={logo} alt="SwiftGo" className="h-10 w-auto ml-3 mt-3 rounded-sm" />
         </Link>
       </SidebarHeader>
       <SidebarContent>

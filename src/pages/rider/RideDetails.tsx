@@ -200,7 +200,7 @@ const RideDetails = () => {
     ride.driverInfo && ride.status !== "pending" && ride.status !== "cancelled";
 
   return (
-    <div className="container mx-auto max-w-6xl p-4 sm:p-6 lg:p-8">
+    <div className="container mx-auto  p-4 sm:p-6 lg:p-8">
       {/* Header Grid */}
       <header className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <div className="md:col-span-2">
@@ -223,7 +223,7 @@ const RideDetails = () => {
         {/* Left Column - Route & Fare */}
         <div className="lg:col-span-2 space-y-6">
           {/* Fare Card */}
-          <Card className="shadow-md transition-all duration-300 hover:shadow-xl dark:bg-gray-800 dark:border-gray-700">
+          <Card className="shadow-md transition-all duration-300 hover:shadow-md dark:bg-gray-800 dark:border-gray-700">
             <CardContent className="p-6 pt-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
@@ -250,7 +250,7 @@ const RideDetails = () => {
           </Card>
 
           {/* Route Card */}
-          <Card className="shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-gray-800 dark:border-gray-700">
+          <Card className="shadow-lg transition-all duration-300 hover:shadow-md dark:bg-gray-800 dark:border-gray-700">
             <CardHeader>
               <CardTitle className="flex items-center text-xl dark:text-white">
                 <MapPin className="w-5 h-5 mr-2 text-primary" /> Route Details

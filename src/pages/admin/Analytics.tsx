@@ -46,7 +46,7 @@ const Analytics = () => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <Card className="bg-green-100">
+        <Card className="bg-green-100 dark:text-accent">
           <CardHeader>
             <CardTitle className="flex justify-between">
               Total Users <Users />
@@ -55,7 +55,7 @@ const Analytics = () => {
           <CardContent className="text-3xl font-bold">{totalUsers}</CardContent>
         </Card>
 
-        <Card className="bg-blue-100">
+        <Card className="bg-blue-100 dark:text-accent">
           <CardHeader>
             <CardTitle className="flex justify-between">
               Total Drivers <Car />
@@ -66,7 +66,7 @@ const Analytics = () => {
           </CardContent>
         </Card>
 
-        <Card className="bg-yellow-100">
+        <Card className="bg-yellow-100 dark:text-accent">
           <CardHeader>
             <CardTitle className="flex justify-between">
               Total Rides <BarChart />
@@ -75,7 +75,7 @@ const Analytics = () => {
           <CardContent className="text-3xl font-bold">{totalRides}</CardContent>
         </Card>
 
-        <Card className="bg-fuchsia-100">
+        <Card className="bg-fuchsia-100 dark:text-accent">
           <CardHeader>
             <CardTitle className="flex justify-between">
               Revenue <DollarSign />
