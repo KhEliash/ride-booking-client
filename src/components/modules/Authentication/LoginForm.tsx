@@ -99,7 +99,7 @@ export function LoginForm({
               </Button>
             </form>
           </Form>
-          <Link to={"/register"}>Register</Link>
+          <Link to={"/register"}> Register</Link>
         </CardContent>
       </Card>
     </div>
