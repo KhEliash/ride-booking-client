@@ -31,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Activity, BadgeCheck } from "lucide-react";
 
 const formSchema = z
   .object({
@@ -114,12 +115,14 @@ export function RegisterForm({
 
         <div className="flex gap-4 mt-4">
           <div className="p-4 border rounded-xl shadow bg-background/70">
+            <Activity className="text-green-500" />
             <p className="font-semibold">Quick Sign Up</p>
             <p className="text-sm text-muted-foreground">
               Start your journey in under 2 minutes.
             </p>
           </div>
           <div className="p-4 border rounded-xl shadow bg-background/70">
+            <BadgeCheck className="text-blue-500" />
             <p className="font-semibold">Secure Platform</p>
             <p className="text-sm text-muted-foreground">
               Your information is safe with us.
