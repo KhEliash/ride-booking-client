@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cn } from "@/lib/utils";
 import {
   Card,
@@ -19,27 +20,34 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
-import { useWatch } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import Password from "@/components/ui/Password";
 import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z
   .object({
-    name: z
+    name: z.string().min(3, { error: "Name must be at least 3 characters" }),
+    email: z.string().email(),
+    password: z
       .string()
-      .min(3, { error: "Name must be at least three character" })
-      .max(50),
-    email: z.email(),
-    password: z.string().min(6, { error: "At least 6 character" }),
-    confirmPassword: z.string().min(6, { error: "At least six character" }),
+      .min(6, { error: "Password should be at least 6 chars" }),
+    confirmPassword: z
+      .string()
+      .min(6, { error: "Password should be at least 6 chars" }),
     role: z.enum(["driver", "rider"]),
     vehicleModel: z.string().optional(),
     licensePlate: z.string().optional(),
   })
-  .refine((data) => data.password == data.confirmPassword, {
-    message: " Password not matched",
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
     path: ["confirmPassword"],
   });
 
@@ -49,6 +57,7 @@ export function RegisterForm({
 }: React.ComponentProps<"div">) {
   const navigate = useNavigate();
   const [register] = useRegisterMutation();
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -65,7 +74,7 @@ export function RegisterForm({
   const role = useWatch({ control: form.control, name: "role" });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const userInfo = {
+    const payload = {
       name: data.name,
       email: data.email,
       password: data.password,
@@ -77,28 +86,63 @@ export function RegisterForm({
     };
 
     try {
-      const result = await register(userInfo).unwrap();
-      console.log(result);
-      toast.success("User created successfully");
+      await register(payload).unwrap();
+      toast.success("Account created successfully 🎉");
       navigate("/login");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toast.error(error.data.message);
+      toast.error(error?.data?.message || "Registration failed");
     }
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+    <div
+      className={cn(
+        "  grid md:grid-cols-2 items-center justify-center px-6 ",
+        className
+      )}
+      {...props}
+    >
+      {/* left */}
+      <div className="hidden md:flex flex-col justify-center gap-6 pr-12">
+        <h1 className="text-4xl font-bold leading-tight">
+          Create Your Account 🚀
+        </h1>
+        <p className="text-muted-foreground text-lg">
+          Join the fastest growing ride platform. Whether you're a rider or a
+          driver — we've got everything you need.
+        </p>
+
+        <div className="flex gap-4 mt-4">
+          <div className="p-4 border rounded-xl shadow bg-background/70">
+            <p className="font-semibold">Quick Sign Up</p>
+            <p className="text-sm text-muted-foreground">
+              Start your journey in under 2 minutes.
+            </p>
+          </div>
+          <div className="p-4 border rounded-xl shadow bg-background/70">
+            <p className="font-semibold">Secure Platform</p>
+            <p className="text-sm text-muted-foreground">
+              Your information is safe with us.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Form */}
+      <Card className="w-full max-w-lg min-w-xs mx-auto shadow-md border backdrop-blur-xl bg-background/80">
         <CardHeader>
-          <CardTitle>Register to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
+          <CardTitle className="text-3xl text-center font-bold">
+            Register
+          </CardTitle>
+          <CardDescription className="text-center text-muted-foreground">
+            Create an account to get started
           </CardDescription>
         </CardHeader>
+
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {/* Name */}
               <FormField
                 control={form.control}
                 name="name"
@@ -106,13 +150,14 @@ export function RegisterForm({
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="Name" {...field} />
+                      <Input placeholder="Your full name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
+              {/* Email */}
               <FormField
                 control={form.control}
                 name="email"
@@ -120,13 +165,14 @@ export function RegisterForm({
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Email" {...field} />
+                      <Input placeholder="example@mail.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
+              {/* Password */}
               <FormField
                 control={form.control}
                 name="password"
@@ -134,13 +180,14 @@ export function RegisterForm({
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Password {...field} />
+                      <Password placeholder="********" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
+              {/* Confirm Password */}
               <FormField
                 control={form.control}
                 name="confirmPassword"
@@ -148,33 +195,40 @@ export function RegisterForm({
                   <FormItem>
                     <FormLabel>Confirm Password</FormLabel>
                     <FormControl>
-                      <Password {...field} />
+                      <Password placeholder="********" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
+              {/* Role Select */}
               <FormField
                 control={form.control}
                 name="role"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Role</FormLabel>
-                    <FormControl>
-                      <select
-                        {...field}
-                        className="w-full border rounded px-2 py-1"
-                      >
-                        <option value="rider">Rider</option>
-                        <option value="driver">Driver</option>
-                      </select>
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select a role" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="rider">Rider</SelectItem>
+                        <SelectItem value="driver">Driver</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
+              {/* Driver Only Fields */}
               {role === "driver" && (
                 <>
                   <FormField
@@ -190,6 +244,7 @@ export function RegisterForm({
                       </FormItem>
                     )}
                   />
+
                   <FormField
                     control={form.control}
                     name="licensePlate"
@@ -206,12 +261,24 @@ export function RegisterForm({
                 </>
               )}
 
-              <Button type="submit" className="w-full cursor-pointer">
-                Submit
+              <Button
+                type="submit"
+                className="w-full h-12 rounded-xl font-medium cursor-pointer"
+              >
+                Register
               </Button>
             </form>
           </Form>
-          <Link to={"/login"}>Login</Link>
+
+          <p className="text-sm text-center mt-6">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="text-primary font-semibold hover:underline"
+            >
+              Login
+            </Link>
+          </p>
         </CardContent>
       </Card>
     </div>

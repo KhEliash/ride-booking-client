@@ -78,7 +78,7 @@ export function LoginForm({
   return (
     <div
       className={cn(
-        " grid md:grid-cols-2 items-center justify-center px-6 ",
+        " grid md:grid-cols-2 items-center justify-center  md:px-6 ",
         className
       )}
       {...props}
@@ -110,7 +110,7 @@ export function LoginForm({
       </div>
 
       {/* Login Card */}
-      <Card className="w-full max-w-lg mx-auto shadow-md border backdrop-blur-xl bg-background/80">
+      <Card className="w-full max-w-lg min-w-xs mx-auto shadow-md border backdrop-blur-xl bg-background/80">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">
             Login
