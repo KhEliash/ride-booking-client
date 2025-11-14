@@ -1,6 +1,13 @@
 import image1 from "@/assets/images/whyChooseUs.png";
 import image2 from "@/assets/images/whyChooseUs-2.png";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const WhyChooseUs = () => {
+    useEffect(() => {
+    AOS.init({ duration: 500, once: true });
+  }, []);
+
   return (
     <section className="container py-20">
       <h2 className="pb-8 text-3xl font-semibold tracking-tight first:mt-0 text-center mb-12">
@@ -8,7 +15,7 @@ const WhyChooseUs = () => {
       </h2>
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         {/* Feature 1: For Riders */}
-        <div className="flex flex-col gap-4 text-center lg:text-left">
+        <div data-aos="fade-up" className="flex flex-col gap-4 text-center lg:text-left">
           <h3 className="text-2xl font-bold">Safe & Reliable Journeys</h3>
           <p className="text-muted-foreground leading-relaxed">
             Our platform prioritizes your safety with verified drivers,
@@ -21,7 +28,7 @@ const WhyChooseUs = () => {
             <li>Share ride details with loved ones</li>
           </ul>
         </div>
-        <div className="flex justify-center">
+        <div data-aos="fade-up" className="flex justify-center">
           <img
             src={image1}
             alt="Safety and Reliability"
