@@ -1,10 +1,10 @@
-import ProfileUpdate from "@/pages/ProfileUpdate";
 import type { ISidebarItems } from "@/types";
 import { lazy } from "react";
 
 const Analytics = lazy(() => import("@/pages/admin/Analytics"));
 const UserManagements = lazy(() => import("@/pages/admin/UserManagements"));
 const RideOversight = lazy(() => import("@/pages/admin/RideOversight"));
+const ProfileUpdate = lazy(() => import("@/pages/ProfileUpdate"));
 
 export const adminSidebarItems: ISidebarItems[] = [
   {
@@ -35,7 +35,6 @@ export const adminSidebarItems: ISidebarItems[] = [
         url: "/admin/profile",
         component: ProfileUpdate,
       },
-     
     ],
   },
 ];
