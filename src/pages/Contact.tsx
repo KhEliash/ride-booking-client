@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import React, { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,6 +20,7 @@ const ContactPage: React.FC = () => {
   }, []);
 
   const onSubmit = (data: any) => {
+    console.log(data);
     setIsSubmitting(true);
 
     setTimeout(() => {
@@ -30,13 +30,13 @@ const ContactPage: React.FC = () => {
     }, 2000);
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen flex justify-center items-center">
-  //       <Loader2 className="animate-spin h-12 w-12 text-primary" />
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <Loader2 className="animate-spin h-12 w-12 text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground flex justify-center">

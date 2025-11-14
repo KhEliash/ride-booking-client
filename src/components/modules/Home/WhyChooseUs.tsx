@@ -1,5 +1,5 @@
 import image1 from "@/assets/images/whyChooseUs.png";
-import image2 from "@/assets/images/whyChooseUs-2.png";
+import image2 from "@/assets/images/whyChoose-us-2.png";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";

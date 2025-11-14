@@ -1,4 +1,4 @@
-import {
+ import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -6,7 +6,15 @@ import {
 } from "@/components/ui/dialog";
 import { PhoneCall, Share2, BellRing } from "lucide-react";
 
-export default function EmergencyModal({ open, setOpen }) {
+interface EmergencyModalProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+export default function EmergencyModal({
+  open,
+  setOpen,
+}: EmergencyModalProps) {
   const handleCallPolice = () => {
     window.location.href = "tel:999";
   };
@@ -16,12 +24,21 @@ export default function EmergencyModal({ open, setOpen }) {
   };
 
   const handleShareLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
         const { latitude, longitude } = pos.coords;
         alert(`Live location shared!\nLat: ${latitude}\nLng: ${longitude}`);
-      });
-    }
+      },
+      (err) => {
+        console.error(err);
+        alert("Unable to retrieve your location.");
+      }
+    );
   };
 
   return (
