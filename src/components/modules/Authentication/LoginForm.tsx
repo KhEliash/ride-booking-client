@@ -44,6 +44,15 @@ export function LoginForm({
 
   const navigate = useNavigate();
 
+  const handleQuickLogin = async (email: string, password: string) => {
+    try {
+      await login({ email, password }).unwrap();
+      toast.success(`Logged in as ${email}`);
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Login failed");
+    }
+  };
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: { email: "", password: "" },
@@ -175,6 +184,31 @@ export function LoginForm({
               </Button>
             </form>
           </Form>
+          <div>
+            <p className="text-center mt-4 text-xl font-semibold">
+              Quick Login
+            </p>
+            <div className="flex gap-4 justify-center my-6">
+              <Button
+                variant="outline"
+                onClick={() => handleQuickLogin("admin@gmail.com", "123456")}
+              >
+                Admin
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => handleQuickLogin("rider@gmail.com", "123456")}
+              >
+                Rider
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => handleQuickLogin("driver@gmail.com", "123456")}
+              >
+                Driver
+              </Button>
+            </div>
+          </div>
 
           <p className="mt-4 text-center text-sm">
             Don't have an account?{" "}
