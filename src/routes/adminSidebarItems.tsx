@@ -1,3 +1,4 @@
+import ProfileUpdate from "@/pages/ProfileUpdate";
 import type { ISidebarItems } from "@/types";
 import { lazy } from "react";
 
@@ -24,6 +25,17 @@ export const adminSidebarItems: ISidebarItems[] = [
         url: "/admin/ride-oversight",
         component: RideOversight,
       },
+    ],
+  },
+  {
+    title: "Profile",
+    items: [
+      {
+        title: "profile Update",
+        url: "/admin/profile",
+        component: ProfileUpdate,
+      },
+     
     ],
   },
 ];

@@ -52,6 +52,15 @@ export const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["ADMIN"],
     }),
+    updateProfile: builder.mutation({
+      query: (payload) => ({
+        url: "/user/update-profile",
+        method: "PUT",
+        data: payload,
+        headers: { "Content-Type": "application/json" },
+      }),
+      invalidatesTags: ["ADMIN"],
+    }),
   }),
 });
 
@@ -62,5 +71,6 @@ export const {
   useUnblockUserMutation,
   useBlockUserMutation,
   useAllRidesQuery,
-  useAllDriversQuery
+  useAllDriversQuery,
+  useUpdateProfileMutation,
 } = adminApi;

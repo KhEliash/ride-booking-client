@@ -1,3 +1,4 @@
+import UpdateProfile from "@/pages/ProfileUpdate";
 import type { ISidebarItems } from "@/types";
 import { lazy } from "react";
 
@@ -18,6 +19,17 @@ export const riderSidebarItems: ISidebarItems[] = [
         url: "/rider/ride-history",
         component: RideHistory,
       },
+    ],
+  },
+  {
+    title: "Profile",
+    items: [
+      {
+        title: "Profile Update",
+        url: "/rider/profile",
+        component: UpdateProfile,
+      },
+       
     ],
   },
 ];

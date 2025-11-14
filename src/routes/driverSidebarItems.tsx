@@ -6,6 +6,7 @@ const DriverRideHistory = lazy(
 );
 const Earnings = lazy(() => import("@/pages/driver/Earnings"));
 const ManageRides = lazy(() => import("@/pages/driver/ManageRides"));
+const UpdateProfile = lazy(() => import("@/pages/ProfileUpdate"));
 
 export const driverSidebarItems: ISidebarItems[] = [
   {
@@ -25,6 +26,16 @@ export const driverSidebarItems: ISidebarItems[] = [
         title: "Ride history",
         url: "/driver/history",
         component: DriverRideHistory,
+      },
+    ],
+  },
+  {
+    title: "Profile",
+    items: [
+      {
+        title: "Profile Update",
+        url: "/driver/profile",
+        component: UpdateProfile,
       },
     ],
   },
