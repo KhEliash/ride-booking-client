@@ -3,11 +3,17 @@ import { ArrowRight } from "lucide-react";
 import banner from "@/assets/images/banner.png";
 import { Link } from "react-router";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Banner = () => {
   const { data, isLoading } = useUserInfoQuery(undefined);
-  console.log(data?.data?.role);
   const user = data?.data;
+  useEffect(() => {
+    AOS.init({ duration: 500, once: true });
+  }, []);
+
   if (isLoading) {
     <p>Loading</p>;
   }
@@ -15,7 +21,7 @@ const Banner = () => {
     <>
       <section className="relative container overflow-hidden ">
         <div className="relative z-10 mx-auto flex  flex-col items-center justify-between px-6 py-20 md:flex-row md:py-28 lg:px-12">
-          <div className="flex-1 text-center md:text-left">
+          <div data-aos="fade-up" className="flex-1 text-center md:text-left">
             <h1 className="text-4xl font-extrabold leading-tight text-gray-900 dark:text-white sm:text-6xl">
               <span className="block">Your Ride,</span>
               <span className="text-primary block">Your Way.</span>
