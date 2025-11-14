@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import {
   Accordion,
   AccordionItem,
@@ -6,141 +8,205 @@ import {
 } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
 
 const FAQ_DATA = {
   RIDER: [
     {
       q: "How do I book a ride?",
-      a: "You can easily book a ride through our mobile app. Enter your pickup and drop-off locations, choose your vehicle type, and confirm the fare. No account is needed to see fare estimates!",
+      a: "Open the app, enter your pickup and drop-off locations, choose a ride option, and confirm. A nearby driver will be assigned automatically."
     },
     {
-      q: "Can I cancel my ride?",
-      a: "Yes, you can cancel a ride at any time before the driver arrives. A small cancellation fee may apply if you cancel after a few minutes of the driver accepting the trip.",
+      q: "What payment methods are supported?",
+      a: "You can pay using cash, mobile banking services (Nagad, bKash), or saved debit/credit cards depending on availability in your city."
+    },
+    {
+      q: "Can I cancel a ride after booking?",
+      a: "Yes. You can cancel before the driver reaches your pickup point. However, a small cancellation fee may apply if the driver has already waited or traveled towards your location."
     },
     {
       q: "How is the fare calculated?",
-      a: "Fares are calculated based on distance, estimated trip time, and current demand (dynamic pricing). You will always see the final price before confirming the booking.",
+      a: "Fare is based on base fare, total distance, estimated trip duration, and real-time traffic/demand. The final price is shown before confirming the ride."
     },
+    {
+      q: "Is my real phone number shared with the driver?",
+      a: "No. We use a masked phone number system for privacy. Both riders and drivers communicate through a protected proxy number."
+    }
   ],
+
   DRIVER: [
     {
-      q: "What are the requirements to become a driver?",
-      a: "You need to be over 21, possess a valid driver's license, have a clean driving record, and own a 4-door vehicle that meets our model year requirements (usually 2010 or newer).",
+      q: "What documents do I need to sign up as a driver?",
+      a: "You’ll need a valid driving license, NID, profile photo, vehicle registration papers, and a smartphone with stable internet connection."
     },
     {
-      q: "How and when do I get paid?",
-      a: "Drivers are paid weekly via direct deposit. We also offer an instant payout option for a small transaction fee if you need access to your earnings immediately.",
+      q: "When do drivers receive payments?",
+      a: "Earnings are transferred weekly to your designated bank or mobile banking account. You can also use Instant Cashout when available."
     },
     {
-      q: "Do I have to accept all ride requests?",
-      a: "No, you have the flexibility to accept or decline ride requests based on your preference and schedule. However, maintaining a high acceptance rate can lead to better bonuses.",
+      q: "How does driver rating work?",
+      a: "After each trip, riders can rate their driver. Maintaining a strong rating improves your priority for receiving high-value rides."
     },
+    {
+      q: "Do I have to accept every ride request?",
+      a: "No, but frequently canceling or ignoring requests may affect your acceptance rate, which can limit access to bonuses and incentives."
+    },
+    {
+      q: "Can I go offline anytime?",
+      a: "Yes. Drivers can switch from Online to Offline whenever they want—perfect for flexible working hours."
+    }
   ],
+
   GENERAL: [
     {
       q: "Is the app available on iOS and Android?",
-      a: "Yes, our app is available for free download on both the Apple App Store and Google Play Store.",
+      a: "Yes. The app is available for free on both the App Store and Google Play Store."
     },
     {
       q: "How do I contact customer support?",
-      a: "You can reach our 24/7 customer support team directly through the 'Help' section within the app, or by emailing support@ridemgmt.com.",
+      a: "Go to the 'Help & Support' section inside the app. You can chat with support, submit a ticket, or request a callback 24/7."
     },
-  ],
+    {
+      q: "Is my personal data secure?",
+      a: "Absolutely. We use end-to-end encryption, secure payment gateways, and never share personal data with third parties without consent."
+    },
+    {
+      q: "Do you offer promo codes or discounts?",
+      a: "Yes. Promo codes are available during special events and can be applied during checkout before confirming your ride."
+    },
+    {
+      q: "How do I report an issue with a trip?",
+      a: "Open the trip history, select the specific ride, and choose 'Report an Issue'. Our support team will respond within minutes."
+    }
+  ]
+};
+
+ 
+const filterFAQs = (faqs: any[], search: string) => {
+  if (!search.trim()) return faqs;
+  return faqs.filter(
+    (item) =>
+      item.q.toLowerCase().includes(search.toLowerCase()) ||
+      item.a.toLowerCase().includes(search.toLowerCase())
+  );
 };
 
 const Faq = () => {
+  const [search, setSearch] = useState("");
+
+  const filteredRider = filterFAQs(FAQ_DATA.RIDER, search);
+  const filteredDriver = filterFAQs(FAQ_DATA.DRIVER, search);
+  const filteredGeneral = filterFAQs(FAQ_DATA.GENERAL, search);
+
+  const hasResults =
+    filteredRider.length + filteredDriver.length + filteredGeneral.length > 0;
+
   return (
     <div className="flex items-center justify-center">
       <div className="container">
-        {/* Header Section */}
-        <section className="py-12 md:py-20 bg-background border-b border-border/50">
-          <div className="  text-center  ">
-            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-foreground mb-4">
-              Questions? We've Got Answers.
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Find quick solutions to common inquiries about booking, safety,
-              driving, and more.
+
+        {/* Header */}
+        <section className="py-12 md:py-20 text-center">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
+            Questions? We've Got Answers.
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Find quick solutions about booking, safety, and more.
+          </p>
+
+          {/* Search Bar */}
+          <div className="max-w-xl mx-auto mt-10">
+            <Input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search FAQs..."
+              className="h-12 text-base"
+            />
+          </div>
+        </section>
+
+        <section className="py-16 md:py-24">
+          {!hasResults && (
+            <p className="text-center text-muted-foreground text-lg mb-10">
+              No matching questions found.
             </p>
-          </div>
+          )}
+
+          {/* Rider */}
+          {filteredRider.length > 0 && (
+            <>
+              <h2 className="text-3xl font-semibold mb-8 border-b pb-2">
+                <span className="text-primary">Rider</span> Questions
+              </h2>
+
+              <Accordion type="single" collapsible className="mb-16">
+                {filteredRider.map((item, index) => (
+                  <AccordionItem key={index} value={`r-${index}`}>
+                    <AccordionTrigger>{item.q}</AccordionTrigger>
+                    <AccordionContent>{item.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </>
+          )}
+
+          {/* Driver */}
+          {filteredDriver.length > 0 && (
+            <>
+              <h2 className="text-3xl font-semibold mb-8 border-b pb-2">
+                <span className="text-primary">Driver</span> Questions
+              </h2>
+
+              <Accordion type="single" collapsible className="mb-16">
+                {filteredDriver.map((item, index) => (
+                  <AccordionItem key={index} value={`d-${index}`}>
+                    <AccordionTrigger>{item.q}</AccordionTrigger>
+                    <AccordionContent>{item.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </>
+          )}
+
+          {/* General */}
+          {filteredGeneral.length > 0 && (
+            <>
+              <h2 className="text-3xl font-semibold mb-8 border-b pb-2">
+                General Inquiries
+              </h2>
+
+              <Accordion type="single" collapsible>
+                {filteredGeneral.map((item, index) => (
+                  <AccordionItem key={index} value={`g-${index}`}>
+                    <AccordionTrigger>{item.q}</AccordionTrigger>
+                    <AccordionContent>{item.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </>
+          )}
         </section>
 
-        {/* FAQ Accordion Section */}
-        <section className="py-20 md:py-32 ">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-8">
-            <span className="text-primary">Rider</span> Questions
-          </h2>
-          <Accordion type="single" collapsible className="w-full mb-16">
-            {FAQ_DATA.RIDER.map((item, index) => (
-              <AccordionItem key={index} value={`rider-${index}`}>
-                <AccordionTrigger className="text-left font-medium hover:no-underline">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-
-          {/* Driver FAQs */}
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-8">
-            <span className="text-primary">Driver</span> Questions
-          </h2>
-          <Accordion type="single" collapsible className="w-full mb-16">
-            {FAQ_DATA.DRIVER.map((item, index) => (
-              <AccordionItem key={index} value={`driver-${index}`}>
-                <AccordionTrigger className="text-left font-medium hover:no-underline">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-
-          {/* General FAQs */}
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-8">
-            General Inquiries
-          </h2>
-          <Accordion type="single" collapsible className="w-full">
-            {FAQ_DATA.GENERAL.map((item, index) => (
-              <AccordionItem key={index} value={`general-${index}`}>
-                <AccordionTrigger className="text-left font-medium hover:no-underline">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        {/* Support Card */}
+        <section className="py-16 md:py-20">
+          <Card className="p-10 text-center shadow-md">
+            <h3 className="text-2xl font-bold mb-4">
+              Still Can't Find Your Answer?
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              Our support team is available 24/7 to help you.
+            </p>
+            <Link to="/contact">
+              <Button size="lg" className="cursor-pointer">Contact Support</Button>
+            </Link>
+          </Card>
         </section>
 
-        {/* Support Card Section */}
-        <section className="py-16 md:py-20 bg-background">
-          <div className=" text-center ">
-            <Card className="p-8 md:p-12 shadow-xl bg-card">
-              <h3 className="text-2xl font-bold mb-4">
-                Still Can't Find Your Answer?
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                Our dedicated support team is available 24/7 to help you with
-                any specific questions or concerns.
-              </p>
-              <Link to={"/contact"}>
-                <Button size="lg" className="shadow-lg cursor-pointer">
-                  Contact Customer Support
-                </Button>
-              </Link>
-            </Card>
-          </div>
-        </section>
       </div>
     </div>
   );
 };
 
 export default Faq;
+

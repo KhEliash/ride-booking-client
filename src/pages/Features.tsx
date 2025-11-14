@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -15,6 +15,8 @@ import {
 import image from "@/assets/images/feature.png";
 import { Link } from "react-router";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 interface Feature {
   icon: LucideIcon;
@@ -87,6 +89,10 @@ const FeatureCard: React.FC<Feature> = ({ icon: Icon, title, description }) => (
 
 const Features: React.FC = () => {
   const { data } = useUserInfoQuery(undefined);
+  useEffect(() => {
+    AOS.init({ duration: 500, once: true });
+  }, []);
+
   return (
     <div className="space-y-24 flex items-center justify-center">
       <div className="space-y-24 container ">
@@ -135,7 +141,7 @@ const Features: React.FC = () => {
             <TabsContent value="riders">
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {RIDER_FEATURES.map((feature, index) => (
-                  <FeatureCard key={`rider-${index}`} {...feature} />
+                  <FeatureCard data-aos="fade-up" data-aos-delay={index * 100} key={`rider-${index}`} {...feature} />
                 ))}
               </div>
             </TabsContent>
@@ -144,7 +150,12 @@ const Features: React.FC = () => {
             <TabsContent value="drivers">
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {DRIVER_FEATURES.map((feature, index) => (
-                  <FeatureCard key={`driver-${index}`} {...feature} />
+                  <FeatureCard
+                    data-aos="fade-up"
+                    data-aos-delay={index * 100}
+                    key={`driver-${index}`}
+                    {...feature}
+                  />
                 ))}
               </div>
             </TabsContent>

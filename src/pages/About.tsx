@@ -3,8 +3,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const About = () => {
+    useEffect(() => {
+    AOS.init({ duration: 500, once: true });
+  }, []);
+
   return (
     <>
       <div className=" flex justify-center">
@@ -54,7 +61,7 @@ const About = () => {
                 </h2>
 
                 <div className="space-y-6 mt-6">
-                  <Card className="p-4 border-l-4 border-primary">
+                  <Card data-aos="fade-up" className="p-4 border-l-4 border-primary">
                     <h3 className="text-xl font-bold flex items-center mb-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +83,7 @@ const About = () => {
                       button and verified profiles, is non-negotiable.
                     </p>
                   </Card>
-                  <Card className="p-4 border-l-4 border-green-500">
+                  <Card data-aos="fade-up" className="p-4 border-l-4 border-green-500">
                     <h3 className="text-xl font-bold flex items-center mb-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +105,7 @@ const About = () => {
                       priced for everyone in the communities we serve.
                     </p>
                   </Card>
-                  <Card className="p-4 border-l-4 border-blue-500">
+                  <Card data-aos="fade-up" className="p-4 border-l-4 border-blue-500">
                     <h3 className="text-xl font-bold flex items-center mb-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
