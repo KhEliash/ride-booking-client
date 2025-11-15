@@ -16,7 +16,7 @@ const About = () => {
     <>
       <div className=" flex justify-center">
         <div className="container">
-          <section className="py-16 md:py-24 bg-background">
+          <section className="py-16 md:py-18 bg-background">
             <div className="  text-center ">
               <Badge variant="outline" className="text-sm px-3 py-1 mb-4">
                 Our Story
@@ -32,7 +32,7 @@ const About = () => {
             </div>
           </section>
 
-          <section className="py-20 md:py-32 ">
+          <section className="py-20 md:py-28 ">
             <div className="  grid lg:grid-cols-2 gap-12 items-start">
               {/* Left Column: Background & History */}
               <div>
@@ -83,7 +83,7 @@ const About = () => {
                       button and verified profiles, is non-negotiable.
                     </p>
                   </Card>
-                  <Card data-aos="fade-up" className="p-4 border-l-4 border-green-500">
+                  <Card data-aos="fade-up" data-aos-delay="200" className="p-4 border-l-4 border-green-500">
                     <h3 className="text-xl font-bold flex items-center mb-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ const About = () => {
                       priced for everyone in the communities we serve.
                     </p>
                   </Card>
-                  <Card data-aos="fade-up" className="p-4 border-l-4 border-blue-500">
+                  <Card data-aos="fade-up" data-aos-delay="300" className="p-4 border-l-4 border-blue-500">
                     <h3 className="text-xl font-bold flex items-center mb-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

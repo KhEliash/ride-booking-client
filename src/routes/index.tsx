@@ -54,10 +54,6 @@ export const router = createBrowserRouter([
         Component: Register,
         path: "/register",
       },
-      {
-        Component: RideDetails,
-        path: "/ride-details/:id",
-      },
     ],
   },
   {
@@ -88,5 +84,9 @@ export const router = createBrowserRouter([
   {
     Component: Unauthorized,
     path: "/unauthorized",
+  },
+  {
+    Component: RideDetails,
+    path: "/ride-details/:id",
   },
 ]);

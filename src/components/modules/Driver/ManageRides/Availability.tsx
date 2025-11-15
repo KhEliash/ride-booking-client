@@ -31,7 +31,7 @@ const Availability = () => {
   const [availability, { isLoading: updating }] = useAvailabilityMutation();
   const [statusUpdate] = useUpdateRideStatusMutation();
   const ride = currentRide?.data;
-
+  console.log(driver);
   const [status, setStatus] = useState("");
   useEffect(() => {
     if (ride?.status) {
@@ -63,6 +63,9 @@ const Availability = () => {
     const payload = { isOnline: value };
 
     try {
+      if (driver?.data?.currentRideId && driver?.data?.isOnline === true) {
+        return toast.error("You can not go offline right now");
+      }
       const res = await availability(payload).unwrap();
       toast.success(res.data.message || "Status updated successfully");
     } catch (error) {
@@ -118,7 +121,7 @@ const Availability = () => {
                 value={isOnline}
                 onChange={handleSelect}
                 disabled={updating}
-                className="w-1/2 border border-gray-300 rounded-lg py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-60"
+                className="w-1/2 border border-gray-300 rounded-lg py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-60 cursor-pointer"
               >
                 <option value="true">Online</option>
                 <option value="false">Offline</option>

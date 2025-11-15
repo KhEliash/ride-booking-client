@@ -107,7 +107,7 @@ const Faq = () => {
       <div className="container">
 
         {/* Header */}
-        <section className="py-12 md:py-20 text-center">
+        <section className="py-12 md:py-18 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
             Questions? We've Got Answers.
           </h1>
@@ -126,7 +126,7 @@ const Faq = () => {
           </div>
         </section>
 
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-18">
           {!hasResults && (
             <p className="text-center text-muted-foreground text-lg mb-10">
               No matching questions found.

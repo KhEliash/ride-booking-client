@@ -41,7 +41,7 @@ const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-background text-foreground flex justify-center">
       <div className="container">
-        <section className="py-16 md:py-24 bg-secondary/10 dark:bg-secondary/20 border-b border-border/50">
+        <section className="py-16 md:py-18 bg-secondary/10 dark:bg-secondary/20 border-b border-border/50">
           <div className="text-center">
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
               Get In Touch

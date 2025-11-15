@@ -96,7 +96,7 @@ const Features: React.FC = () => {
   return (
     <div className="space-y-24 flex items-center justify-center">
       <div className="space-y-24 container ">
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-16 md:py-18 bg-background">
           <div className="  text-center  ">
             <Badge
               variant="default"
@@ -115,7 +115,7 @@ const Features: React.FC = () => {
           </div>
         </section>
 
-        <section className="py-10 md:py-20 ">
+        <section className="py-10 md:py-18 ">
           <h2 className="scroll-m-20 text-3xl font-bold tracking-tight text-center mb-12 text-foreground">
             Features Tailored to Your Role
           </h2>
