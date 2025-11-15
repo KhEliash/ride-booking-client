@@ -93,7 +93,7 @@ const Banner = () => {
             <img
               src={banner}
               alt="Rider on scooter"
-              className="mx-auto md:w-[720px] lg:h-[400px]  shadow-lg rounded-2xl"
+              className="mx-auto md:w-[720px] lg:h-[400px]  shadow-2xl rounded-2xl"
             />
           </div>
         </div>
